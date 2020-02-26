@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="utf8">
+    <head>
+        <title>Petals around the Rose</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+        <link rel="stylesheet" href="index.css">
+        <script id="result" type="text/template">
+            <li>
+                Result:
+                {{#each values}}
+                    <img alt="{{ this }}" title="{{ this }}" src="img/{{ this }}.png">
+                {{/each}}
+                (Total: {{ total }})
+
+            </li>
+        </script>
+        <script id="guess" type="text/template">
+            Correct Guesses: {{ value }}
+        </script>
+        <script type="text/javascript" src="index.js"></script>
+    </head>
+    <body>
+    <h1>Petals around the Rose</h1>
+    <p>The goal of this game is to determine the rules by which the result is derived from the six rolled die</p>
+    <div id="MainView">
+        <div id="die1"></div>
+        <div id="die2"></div>
+        <div id="die3"></div>
+        <div id="die4"></div>
+        <div id="die5"></div>
+        <div id="die6"></div>
+    </div>
+    <div id="correctGuesses">Correct Guesses</div>
+    <button id="roll">Roll</button>
+    <ul id="rollLog">
+    </ul>
+    </body>
+</html>
