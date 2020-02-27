@@ -1,12 +1,17 @@
 const numDie = 6;
-let count = 0;
-const template = Handlebars.compile(document.querySelector('#result').innerHTML);
-const imgTemplate = Handlebars.compile("<img src=\"img/{{ value }}.png\">")
 
+let countCorrect = 0;
+let currentResult = -1;
+let lastResult;
+let currentAnswer;
+
+// .random gives a result between 0 and 1
+// multiplying changes range to 0 to 5 so add 1 to result in 1 to 6
 function roll(){
     return Math.floor(Math.random() * 6) +  1;
 }
 
+// Super secret sauce
 function transformRoll(roll){
     let value = 0;
     if (roll === 3){
@@ -18,40 +23,55 @@ function transformRoll(roll){
     return value
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#roll').onclick = () =>{
-        const rolls = [];
-        let total = 0;
-        for (let i = 0; i < numDie; i++) {
-            const value = roll();
-            rolls.push(value);
-            total += transformRoll(value);
-            const imgContent = imgTemplate({'value': value});
-            document.querySelector(`#die${i}`).innerHTML = imgContent;
-        }
-        const content = template({'values': rolls, 'total': total, 'count':count});
-        document.querySelector('#rollLog').innerHTML += content;
+function generateRoll(){
+    // If this is not the first roll (when lastResult is undefined)
+    // then add the last result to the history log
+    if (lastResult !== undefined){
+        document.querySelector('#rollLog').innerHTML = lastResult + document.querySelector('#rollLog').innerHTML;
     }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#reveal').onclick = () =>{
-
-        var x = document.getElementById("#results");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
+    // Generate 6d6 and load the images
+    const rolls = [];
+    let total = 0;
+    for (let i = 0; i < numDie; i++) {
+        const value = roll();
+        rolls.push(value);
+        total += transformRoll(value);
+        document.querySelector(`#die${i}`).innerHTML = Handlebars.templates.imageTemplate({"value" : value});
     }
 
-});
+    // Store the result log template for when the next run is initiated
+    const templateContent = {
+        'values': rolls,
+        'total': total
+    };
+    lastResult = Handlebars.templates.resultTemplate(templateContent);//template({'values': rolls, 'total': total});
 
-function ShowHide(){
-    var x = document.getElementById("#results");
+    // Rehind the answer and fill in the result value
+    //document.getElementById("answer").style.display = "none";
+    document.querySelector(("#answer")).innerHTML = "";
+    currentAnswer = total;
+}
+
+// The answer is hidden by default. This lets the user choose when to show it
+function showAnswer(){
+    let x = document.getElementById("answer");
+    x.innerHTML = currentAnswer.toString();
+}
+
+// This may clutter the page by default, so hide it unless the user requsts it.
+function showHistory() {
+    let x = document.getElementById("rollLog");
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
         x.style.display = "none";
     }
 }
+
+// When the page is done loading, add the onclick functions to the respective buttons
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("rollButton").onclick = () => generateRoll();
+    document.getElementById("historyButton").onclick = () => showHistory();
+    generateRoll();
+
+});

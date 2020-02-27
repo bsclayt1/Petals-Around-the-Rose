@@ -7,3 +7,21 @@ img {
     height: 3em;
     vertical-align: middle;
 }
+
+div{
+    display: flex;
+    justify-content: space-between;
+}
+.container {
+    display: grid;
+    grid-gap: 1em 1em;
+}
+
+.container.custom-container {
+    padding: 1em 1em;
+}
+
+.dice{
+    width: 5em;
+    padding: 1em 1em;
+}
