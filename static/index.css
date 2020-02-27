@@ -1,13 +1,20 @@
 
 li {
-    line-height: 3em;
+    line-height: 2em;
     margin: 1em;
 }
 img {
-    height: 5em;
+    height: 6em;
+    width: 6em;
     padding: 1em 1em;
 }
-
+ul > li > img {
+    height: 3em;
+    width: 3em;
+}
+p {
+    min-height: 1.5em;
+}
 div{
     display: flex;
     justify-content: space-between;
@@ -24,4 +31,12 @@ div{
 .dice{
     width: 5em;
     padding: 1em 1em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
 }

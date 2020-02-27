@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Petals around the Rose</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"></script>
+    <link rel="stylesheet" href="/static/index.css">
+    <script type="text/javascript" src="/static/templatesCompiled.js"></script>
+    <script type="text/javascript" src="/static/index.js"></script>
+</head>
+<body class="text-center align-content-center">
+    <h1 class="text-center">Petals around the Rose</h1>
+    <p class="text-center">The goal of this game is to determine the rules by which the result is derived from the six rolled die</p>
+    <div id="MainView" class="container w-75 justify-content-center">
+        <div class="row">
+            <div id="die0" class="col-md-4 col-xs-6 dice"><img src="/static/img/1.png" alt="1"></div>
+            <div id="die1" class="col-md-4 col-xs-6 dice"><img src="/static/img/2.png" alt="2"></div>
+            <div id="die2" class="col-md-4 col-xs-6 dice"><img src="/static/img/3.png" alt="3"></div>
+            <div id="die3" class="col-md-4 col-xs-6 dice"><img src="/static/img/4.png" alt="4"></div>
+            <div id="die4" class="col-md-4 col-xs-6 dice"><img src="/static/img/5.png" alt="5"></div>
+            <div id="die5" class="col-md-4 col-xs-6 dice"><img src="/static/img/6.png" alt="6"></div>
+        </div>
+    </div>
+    <button id="answerButton" >Show Answer</button>
+    <button id="rollButton">New Roll</button>
+    <button id="historyButton">Show History</button>
+    <p id="answer">Answer: </p>
+        <form id="answerForm" >
+            <label for="guess">Guess:</label>
+            <input type="number" id="guess" name="guess" value="value"><br><br>
+            <button id="submitButton">Submit</button>
+        </form>
+
+
+
+   <p id="correctGuesses">Correct Guesses: 0</p>
+    <div id="history" style="display: none;">
+        <h4>History</h4>
+        <ul id="rollLog">
+
+        </ul>
+    </div>
+
+</body>
+</html>

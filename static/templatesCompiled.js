@@ -19,11 +19,11 @@ templates['imageTemplate'] = template({"compiler":[8,">= 4.3.0"],"main":function
         return undefined
     };
 
-  return "<img src=\"img/"
-    + alias4(((helper = (helper = lookupProperty(helpers,"value") || (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data,"loc":{"start":{"line":1,"column":14},"end":{"line":1,"column":25}}}) : helper)))
+  return "<img src=\"/static/img/"
+    + alias4(((helper = (helper = lookupProperty(helpers,"value") || (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data,"loc":{"start":{"line":1,"column":22},"end":{"line":1,"column":33}}}) : helper)))
     + ".png\" alt=\""
-    + alias4(((helper = (helper = lookupProperty(helpers,"value") || (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data,"loc":{"start":{"line":1,"column":36},"end":{"line":1,"column":47}}}) : helper)))
-    + "\" class=\"dice\">";
+    + alias4(((helper = (helper = lookupProperty(helpers,"value") || (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data,"loc":{"start":{"line":1,"column":44},"end":{"line":1,"column":55}}}) : helper)))
+    + "\">";
 },"useData":true});
 templates['resultTemplate'] = template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -32,7 +32,7 @@ templates['resultTemplate'] = template({"1":function(container,depth0,helpers,pa
     + alias2(alias1(depth0, depth0))
     + "\" title=\""
     + alias2(alias1(depth0, depth0))
-    + "\" src=\"img/"
+    + "\" src=\"/static/img/"
     + alias2(alias1(depth0, depth0))
     + ".png\">\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {

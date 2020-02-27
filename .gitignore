@@ -1,3 +1,5 @@
 .idea
 static/.idea
 venv
+*.pyc
+__pycache__/

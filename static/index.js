@@ -1,7 +1,6 @@
 const numDie = 6;
 
 let countCorrect = 0;
-let currentResult = -1;
 let lastResult;
 let currentAnswer;
 
@@ -22,8 +21,15 @@ function transformRoll(roll){
     }
     return value
 }
-
+// Reset the form after each round
+function resetForm(){
+    let form = document.getElementById("answerForm").elements[0];
+    form.style.backgroundColor = "#FFFFFF";
+    form.value = "";
+}
 function generateRoll(){
+    //document.getElementById("answerForm").elements[0].style.backgroundColor = "#FFFFFF";
+    resetForm();
     // If this is not the first roll (when lastResult is undefined)
     // then add the last result to the history log
     if (lastResult !== undefined){
@@ -36,6 +42,7 @@ function generateRoll(){
         const value = roll();
         rolls.push(value);
         total += transformRoll(value);
+        console.log(Handlebars.templates.imageTemplate({'value': value}));
         document.querySelector(`#die${i}`).innerHTML = Handlebars.templates.imageTemplate({"value" : value});
     }
 
@@ -55,12 +62,12 @@ function generateRoll(){
 // The answer is hidden by default. This lets the user choose when to show it
 function showAnswer(){
     let x = document.getElementById("answer");
-    x.innerHTML = currentAnswer.toString();
+    x.innerHTML = "Answer: " + currentAnswer.toString();
 }
 
 // This may clutter the page by default, so hide it unless the user requsts it.
 function showHistory() {
-    let x = document.getElementById("rollLog");
+    let x = document.getElementById("history");
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
@@ -68,10 +75,29 @@ function showHistory() {
     }
 }
 
+function checkAnswer(){
+    const form = document.getElementById("answerForm").elements[0];
+    const submittedValue = parseInt(form.value);
+    if (submittedValue === currentAnswer){
+        form.style.backgroundColor = "#00FF00";
+        countCorrect +=1;
+    }
+    else{
+        form.style.backgroundColor = "#FF0000";
+    }
+    document.getElementById("correctGuesses").innerHTML = Handlebars.templates.guessCount({"value": countCorrect});
+    return false
+}
 // When the page is done loading, add the onclick functions to the respective buttons
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("rollButton").onclick = () => generateRoll();
     document.getElementById("historyButton").onclick = () => showHistory();
+    document.getElementById("answerButton").onclick = () => showAnswer();
+    document.getElementById("answerForm").onsubmit = () => checkAnswer();
+    document.getElementById("submitButton").onclick = () => checkAnswer();
+    //var form = document.getElementById("answer");
+    //function handleForm(event) { event.preventDefault(); }
+    //form.addEventListener('submit', handleForm);
     generateRoll();
 
 });
