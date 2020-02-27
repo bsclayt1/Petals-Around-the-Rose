@@ -3,6 +3,7 @@ const numDie = 6;
 let countCorrect = 0;
 let lastResult;
 let currentAnswer;
+let correctlyAnswered;
 
 // .random gives a result between 0 and 1
 // multiplying changes range to 0 to 5 so add 1 to result in 1 to 6
@@ -28,7 +29,7 @@ function resetForm(){
     form.value = "";
 }
 function generateRoll(){
-    //document.getElementById("answerForm").elements[0].style.backgroundColor = "#FFFFFF";
+    correctlyAnswered = false;
     resetForm();
     // If this is not the first roll (when lastResult is undefined)
     // then add the last result to the history log
@@ -80,7 +81,10 @@ function checkAnswer(){
     const submittedValue = parseInt(form.value);
     if (submittedValue === currentAnswer){
         form.style.backgroundColor = "#00FF00";
-        countCorrect +=1;
+        if (correctlyAnswered === false){
+             countCorrect +=1;
+             correctlyAnswered = true;
+        }
     }
     else{
         form.style.backgroundColor = "#FF0000";
